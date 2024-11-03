@@ -13,19 +13,20 @@ namespace www
 {
     public partial class dab : Form
     {
-        private SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-EAONQ68; Initial Catalog=zz; Integrated Security=True");
+        private SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-EAONQ68; Initial Catalog=asd; Integrated Security=True");
+        private DataTable table = new DataTable();
+
+        private string currentTableName; // Хранит название текущей таблицы
         public dab()
         {
             InitializeComponent();
-            button5.Visible = false;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM enrollee", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Master", con);
             SqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
 
@@ -33,14 +34,13 @@ namespace www
             dataGridView1.DataSource = table;
 
             con.Close();
-            button5.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM examiner", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Client", con);
             SqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
 
@@ -48,14 +48,13 @@ namespace www
             dataGridView1.DataSource = table;
 
             con.Close();
-            button5.Visible = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM subject", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Service", con);
             SqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
 
@@ -64,7 +63,6 @@ namespace www
 
             con.Close();
 
-            button5.Visible = true;
             dataGridView1.ReadOnly = false;
         }
 
@@ -72,14 +70,13 @@ namespace www
         {
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT e.examID, e.enrolleeID, e.examinerID, e.date_exam, e.grade, s.name_subject AS subject_name FROM exam e JOIN subject s ON e.subjectID = s.subjectID", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Appointment", con);
             SqlDataReader reader = cmd.ExecuteReader();
             DataTable table = new DataTable();
 
             table.Load(reader);
             dataGridView1.DataSource = table;
             con.Close();
-            button5.Visible = false;
         }
 
         private void button5_Click(object sender, EventArgs e)

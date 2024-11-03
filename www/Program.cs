@@ -16,7 +16,7 @@ namespace www
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new welcome());
+            Application.Run(new dab());
         }
     }
 }
